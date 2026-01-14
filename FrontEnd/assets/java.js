@@ -28,7 +28,7 @@ works.forEach(work => {
     figure.appendChild(img);
     // Ajouter la légende au figure
     figure.appendChild(figcaption);
-    // Ajouter le figure au conteneur de la galerie
+    // Ajouter le figure au conteneur de la galeriee
     galleryContainer.appendChild(figure);
 });
     
