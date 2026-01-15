@@ -4,7 +4,7 @@
 				<figcaption>Abajour Tahina</figcaption>
 			</figure> */}
 
-async function displayWorks  ()  {
+async function displayWorks  ()  { //commentaire
 const works  = await fetch('http://localhost:5678/api/works',).then(response => response.json())
 
 const galleryContainer = document.getElementById('gallery');
