@@ -169,7 +169,7 @@ margin: auto;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 
-input[type="submit"]{
+input[type="submit" ]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
@@ -178,6 +178,13 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	padding-inline: 8px;
+	padding-block: 16px;
+}
+
+input[type="submit"]:hover {
+	background-color: #0E2F28;
+	cursor: pointer;
 }
 
 footer nav ul {
@@ -186,3 +193,48 @@ footer nav ul {
 	margin: 2em
 }
 
+/* mon code */
+
+/* général */
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.bold {
+	font-weight: 700;
+}
+.underline {
+	text-decoration: underline !important;
+}
+.text_center {
+	text-align: center !important;
+}
+
+/* accueil */
+
+
+#filters{
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	margin-bottom: 30px;
+}
+.filter-button {
+	font-size: 16px;
+  font-family: "Syne";
+  font-weight: 700;
+  color: #1d6154;
+  background-color: #fff;
+  min-width: 100px;
+  padding-inline: 8px;
+  padding-block: 16px;
+  text-align: center;
+  border-radius: 60px;
+  border: 2px solid #1d6154;
+  cursor: pointer;
+}
+.button-active {
+  background-color: #1d6154;
+  color: #fff;
+}
