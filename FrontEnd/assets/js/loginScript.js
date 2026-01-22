@@ -24,11 +24,10 @@ async function submitForm(event) {
         alert('Erreur dans l’identifiant ou le mot de passe');
     }
     else if (response.ok){
-        // response.json().then(data =>{
-        //     localStorage.setItem('token', data.token);
-        //     window.location.href = 'index.html';
-        // })  
-        console.log(response.json());
+       response.json().then(data =>{
+        localStorage.setItem('token', data.token);
+        window.location.href = 'index.html';
+       })
     }
 })
 
