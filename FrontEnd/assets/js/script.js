@@ -113,3 +113,5 @@ const modulePattern = {
 
 // Initialiser le module
 modulePattern.init();
+const token = localStorage.getItem("token");
+console.log ("Token:", token);
