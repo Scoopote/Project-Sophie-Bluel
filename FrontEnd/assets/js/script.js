@@ -1,6 +1,7 @@
 // URL de base de l'API
 const API_BASE_URL = "http://localhost:5678/api";
-
+const token = localStorage.getItem("token");
+console.log("Token:", token);
 // Fonction pour récupérer les travaux
 async function getWorks() {
   const response = await fetch(`${API_BASE_URL}/works`);
@@ -89,10 +90,13 @@ function setFilterButtonsActions(categories) {
   });
 }
 
+
+
 // Initialise les filtres et affiche les travaux
 async function init() {
   const categories = await getCategories();
-  createFilterButtons(categories);
+  if (!token){
+  createFilterButtons(categories);}
   setFilterButtonsActions(categories);
   displayWorks();
 }
@@ -100,5 +104,46 @@ async function init() {
 // Lancement du script
 init();
 
-const token = localStorage.getItem("token");
-console.log("Token:", token);
+
+function headerLogged(){
+const modeEdition = document.querySelector(".mode_edition");
+const login = document.getElementById("login");
+const logout = document.getElementById("logout");
+const mesProjets = document.getElementById("MesProjets");
+  if (token) {
+modeEdition.style.display = "block";
+login.style.display = "none";
+logout.style.display = "block";
+mesProjets.innerHTML='Mes Projets<span class="projet_modif"><i class="fa-solid fa-pen-to-square"></i> Modifier</span>'
+
+  }
+    
+}
+headerLogged();
+function logout (){
+  const logout = document.getElementById("logout");
+  logout.addEventListener("click", function(){
+    localStorage.removeItem("token");
+    window.location.href="index.html";
+  });
+
+}
+logout();
+
+async function galleryModal(){
+    const gallery = document.getElementById("modal_content");
+    console.log(gallery);
+    const works = await getWorks();
+
+    works.forEach((work) => {
+    const div = document.createElement("div");
+    div.innerHTML='<div class="trash_color"><i class="fa-solid fa-trash-can"></i></div>'
+    div.style.backgroundImage = `url(${work.imageUrl})`;
+    div.classList.add("modal_item");
+    gallery.appendChild(div);
+  });
+}
+
+galleryModal()
+
+

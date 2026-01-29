@@ -211,6 +211,25 @@ a {
 	text-align: center !important;
 }
 
+/* header */
+#logout{
+	display: none;
+}
+.mode_edition{
+	position: absolute;
+	top: 0;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	display: none;
+	font-size: 14px;
+	padding: 8px 16px;
+	color: white;
+	padding-inline: 8px;
+	padding-block: 16px;
+	background-color: black;
+}
+
 /* accueil */
 
 
@@ -237,4 +256,65 @@ a {
 .button-active {
   background-color: #1d6154;
   color: #fff;
+}
+.projet_modif{
+	margin-left: 10px;
+	color: black;
+	font-family: 'Work Sans';
+	font-size:10px;
+	letter-spacing: 0.1em;
+	cursor: pointer;
+}
+#MesProjets{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+/* modal */
+.modale_gallery {
+	padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  z-index: 1;
+  left: 63vh;
+  top: 660px;
+  width: 630px;
+  height: 688px;
+  overflow: auto;
+  background-color: rgb(255, 255, 255);
+}
+.modale_close {
+  align-self: flex-end;
+
+  cursor: pointer;
+}
+.title_mod_gallery {
+  font-family: "Syne";
+  font-weight: 700;
+  font-size: 24px;
+  color: #000000;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.modal_content{
+	display: flex;
+	flex-wrap: wrap;
+	border-bottom: #000000 2px solid;
+	width: 100%;
+}
+.modal_item{
+	width: 50%;
+	object-fit: cover;
+
+}
+.trash_color{
+	color: #ffffff;
+	background-color: #000000;
+	border-radius: 50%;
+	padding: 5px;
+	cursor: pointer;
+
 }

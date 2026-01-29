@@ -9,17 +9,20 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+
 <header>
+	<div class="mode_edition"><i class="fa-solid fa-pen-to-square"></i> Mode édition</div>
 		<a href="index.html"><h1>Sophie Bluel <span>Architecte d'intérieur</span></h1></a>
 
 	<nav>
 		<ul>
 			<li>projets</li>
 			<li>contact</li>
-			<li><a href="./login.html">login</a></li>
+			<li id="login"><a href="./login.html">login</a></li>
+			<li id="logout"><a href="#">logout</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -41,7 +44,7 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<h2 id="MesProjets">Mes Projets</h2>
 		<div id="filters"></div>
 		<div id="gallery" class="gallery">
 			
@@ -70,7 +73,14 @@
 		</ul>
 	</nav>
 </footer>
-
+<article class="modale_gallery">
+	<div class="modale_close"><i class="fa-solid fa-xmark"></i></div>
+	<h1 class="title_mod_gallery">Gallerie photo</h1>
+	<div id="modal_content" class="modal_content">
+	</div>
+</article>
+<div id="shad"></div>
 <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
