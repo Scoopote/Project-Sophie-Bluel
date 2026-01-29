@@ -210,6 +210,18 @@ a {
 .text_center {
 	text-align: center !important;
 }
+.button{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 180px;
+	text-align: center;
+	border-radius: 60px ;
+	padding-inline: 8px;
+	padding-block: 16px;
+}
 
 /* header */
 #logout{
@@ -302,19 +314,30 @@ a {
 .modal_content{
 	display: flex;
 	flex-wrap: wrap;
+	gap: 20px;
 	border-bottom: #000000 2px solid;
 	width: 100%;
 }
 .modal_item{
-	width: 50%;
+	width: 95px;
+	height: 150.57px;
 	object-fit: cover;
+	display:flex;
+	flex-direction: column;
+	background-size: contain;
+		background-repeat: no-repeat;
+		padding: 5px;
 
+
+	
 }
 .trash_color{
 	color: #ffffff;
 	background-color: #000000;
-	border-radius: 50%;
+	border-radius: 5px;
 	padding: 5px;
 	cursor: pointer;
+	width: fit-content;
+	align-self: flex-end;
 
 }
