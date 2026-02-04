@@ -73,14 +73,50 @@
 		</ul>
 	</nav>
 </footer>
-<article class="modale_gallery">
-	<div class="modale_close"><i class="fa-solid fa-xmark"></i></div>
-	<h1 class="title_mod_gallery">Gallerie photo</h1>
-	<div id="modal_content" class="modal_content">
-	</div>
-	<button class="button" > Ajouter une photo</button>
+
+	<article class="modale_gallery">
+  <div class="modale_header">
+    <div class="modale_back"><i class="fa-solid fa-arrow-left"></i></div>
+    <div class="modale_close"><i class="fa-solid fa-xmark"></i></div>
+  </div>
+
+  <h1 class="title_mod_gallery">Gallerie photo</h1>
+
+  <!-- Vue 1 : galerie -->
+  <div id="modal_content" class="modal_content">
+  </div>
+
+  <!-- Vue 2 : formulaire d'ajout -->
+  <form id="modal_form" class="modal_form">
+    <h2>Ajout photo</h2>
+
+    <div class="modal_upload">
+      <div class="modal_upload_preview" id="modal_upload_preview"></div>
+      <div class="modal_upload_content">
+        <i class="fa-regular fa-image"></i>
+        <button type="button" class="button button_upload">+ Ajouter une photo</button>
+        <p>jpg, png : 4mo max</p>
+        <input type="file" id="image" name="image" accept="image/*">
+      </div>
+    </div>
+
+    <label for="title">Titre</label>
+    <input type="text" id="title" name="title">
+
+    <label for="category">Catégorie</label>
+    <select id="category" name="category">
+      <!-- options remplies en JS plus tard -->
+    </select>
+
+    <div class="modal_form_footer">
+      <button type="submit" class="button button_validate">Valider</button>
+    </div>
+  </form>
+
+  <button id="button_add_photo" class="button">Ajouter une photo</button>
 </article>
 <div id="shad"></div>
+
 <script src="./assets/js/script.js"></script>
 </body>
 

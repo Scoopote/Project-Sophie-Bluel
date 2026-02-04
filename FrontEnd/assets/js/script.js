@@ -1,33 +1,32 @@
-// URL de base de l'API
+// Configuration de l'API
 const API_BASE_URL = "http://localhost:5678/api";
 const token = localStorage.getItem("token");
 console.log("Token:", token);
-// Fonction pour récupérer les travaux
+
+// Récupération des travaux
 async function getWorks() {
   const response = await fetch(`${API_BASE_URL}/works`);
   const works = await response.json();
   return works;
 }
 
-// Fonction pour récupérer les catégories
+// Récupération des catégories
 async function getCategories() {
   const response = await fetch(`${API_BASE_URL}/categories`);
   const categories = await response.json();
   return categories;
 }
 
-// Affiche la liste des travaux dans la galerie
+// Rendu de la galerie principale
 async function displayWorks(selectedCategory = null) {
   const works = await getWorks();
   const gallery = document.getElementById("gallery");
 
-  // On vide la galerie avant de rajouter les éléments
   gallery.innerHTML = "";
 
   works.forEach((work) => {
-    // Si une catégorie est sélectionnée, on filtre
     if (selectedCategory && work.categoryId !== selectedCategory.id) {
-      return; // on passe au travail suivant
+      return;
     }
 
     const figure = document.createElement("figure");
@@ -44,17 +43,15 @@ async function displayWorks(selectedCategory = null) {
   });
 }
 
-// Crée les boutons de filtre
+// Création des boutons de filtre
 function createFilterButtons(categories) {
   const filtersContainer = document.getElementById("filters");
 
-  // Bouton "Tous"
   const buttonAll = document.createElement("button");
   buttonAll.textContent = "Tous";
   buttonAll.classList.add("filter-button", "button-active");
   filtersContainer.appendChild(buttonAll);
 
-  // Boutons pour chaque catégorie
   categories.forEach((category) => {
     const button = document.createElement("button");
     button.textContent = category.name;
@@ -63,24 +60,20 @@ function createFilterButtons(categories) {
   });
 }
 
-// Gère les clics sur les boutons de filtre
+// Gestion des interactions sur les filtres
 function setFilterButtonsActions(categories) {
   const filterButtons = document.querySelectorAll(".filter-button");
 
   filterButtons.forEach((button) => {
     button.addEventListener("click", (event) => {
-      // Gestion de l'état actif
       filterButtons.forEach((btn) => btn.classList.remove("button-active"));
       button.classList.add("button-active");
 
-      // Texte du bouton cliqué
       const buttonText = event.target.textContent;
 
-      // Tous les travaux
       if (buttonText === "Tous") {
         displayWorks();
       } else {
-        // On trouve la catégorie correspondant au bouton
         const selectedCategory = categories.find(
           (category) => category.name === buttonText
         );
@@ -90,60 +83,109 @@ function setFilterButtonsActions(categories) {
   });
 }
 
-
-
-// Initialise les filtres et affiche les travaux
+// Initialisation de la page
 async function init() {
   const categories = await getCategories();
-  if (!token){
-  createFilterButtons(categories);}
-  setFilterButtonsActions(categories);
-  displayWorks();
-}
 
-// Lancement du script
-init();
-
-
-function headerLogged(){
-const modeEdition = document.querySelector(".mode_edition");
-const login = document.getElementById("login");
-const logout = document.getElementById("logout");
-const mesProjets = document.getElementById("MesProjets");
-  if (token) {
-modeEdition.style.display = "block";
-login.style.display = "none";
-logout.style.display = "block";
-mesProjets.innerHTML='Mes Projets<span class="projet_modif"><i class="fa-solid fa-pen-to-square"></i> Modifier</span>'
-
+  if (!token) {
+    createFilterButtons(categories);
+    setFilterButtonsActions(categories);
   }
-    
+
+  displayWorks();
+  headerLogged();
+  initLogout();
+  initModalEvents();
+  galleryModal();
 }
-headerLogged();
-function logout (){
+
+// Mise à jour de l'en-tête selon l'état d'authentification
+function headerLogged() {
+  const modeEdition = document.querySelector(".mode_edition");
+  const login = document.getElementById("login");
   const logout = document.getElementById("logout");
-  logout.addEventListener("click", function(){
-    localStorage.removeItem("token");
-    window.location.href="index.html";
-  });
+  const mesProjets = document.getElementById("MesProjets");
 
+  if (token) {
+    modeEdition.style.display = "block";
+    login.style.display = "none";
+    logout.style.display = "block";
+    mesProjets.innerHTML =
+      'Mes Projets<span class="projet_modif"><i class="fa-solid fa-pen-to-square"></i> Modifier</span>';
+  } else {
+    modeEdition.style.display = "none";
+    login.style.display = "block";
+    logout.style.display = "none";
+  }
 }
-logout();
 
-async function galleryModal(){
-    const gallery = document.getElementById("modal_content");
-    console.log(gallery);
-    const works = await getWorks();
+// Gestion de la déconnexion
+function initLogout() {
+  const logout = document.getElementById("logout");
+  logout.addEventListener("click", function () {
+    localStorage.removeItem("token");
+    window.location.href = "index.html";
+  });
+}
 
-    works.forEach((work) => {
+// Rendu de la galerie dans la modale
+async function galleryModal() {
+  const gallery = document.getElementById("modal_content");
+  gallery.innerHTML = "";
+
+  const works = await getWorks();
+
+  works.forEach((work) => {
     const div = document.createElement("div");
-    div.innerHTML='<div class="trash_color"><i class="fa-solid fa-trash-can"></i></div>'
-    div.style.backgroundImage = `url(${work.imageUrl})`;
     div.classList.add("modal_item");
+    div.style.backgroundImage = `url(${work.imageUrl})`;
+
+    const trash = document.createElement("div");
+    trash.classList.add("trash_color");
+    trash.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+
+    div.appendChild(trash);
     gallery.appendChild(div);
   });
 }
 
-galleryModal()
+// Ouverture de la modale
+function openModal() {
+  const modal = document.querySelector(".modale_gallery");
+  const shad = document.getElementById("shad");
 
+  modal.style.display = "block";
+  shad.style.display = "block";
+}
 
+// Fermeture de la modale
+function closeModal() {
+  const modal = document.querySelector(".modale_gallery");
+  const shad = document.getElementById("shad");
+
+  modal.style.display = "none";
+  shad.style.display = "none";
+}
+
+// Initialisation des événements de la modale
+function initModalEvents() {
+  const mesProjets = document.getElementById("MesProjets");
+  const closeIcon = document.querySelector(".modale_close");
+  const shad = document.getElementById("shad");
+
+  mesProjets.addEventListener("click", () => {
+    if (!token) return;
+    openModal();
+  });
+
+  closeIcon.addEventListener("click", () => {
+    closeModal();
+  });
+
+  shad.addEventListener("click", () => {
+    closeModal();
+  });
+}
+
+// Point d'entrée
+init();

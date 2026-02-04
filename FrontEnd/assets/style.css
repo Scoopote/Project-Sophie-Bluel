@@ -341,3 +341,102 @@ a {
 	align-self: flex-end;
 
 }
+
+/* header de la modale (flèche + croix) */
+.modale_header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modale_back {
+  cursor: pointer;
+  visibility: hidden; /* sera rendu visible en vue formulaire */
+}
+
+/* Formulaire de la modale */
+.modal_form {
+  width: 100%;
+  display: none; /* affiché uniquement en vue formulaire */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* bloc upload */
+.modal_upload {
+  background-color: #e8f1f6;
+  border-radius: 3px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal_upload_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.modal_upload_content i {
+  font-size: 50px;
+  color: #b9c5cc;
+}
+
+.modal_upload_content p {
+  font-size: 10px;
+  color: #444444;
+}
+
+/* input file masqué, on clique sur le bouton */
+.modal_upload input[type="file"] {
+  display: none;
+}
+
+/* prévisualisation de l'image */
+.modal_upload_preview {
+  width: 100%;
+  max-height: 200px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal_upload_preview img {
+  max-height: 200px;
+}
+
+/* labels + champs du formulaire */
+.modal_form label {
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.modal_form input[type="text"],
+.modal_form select {
+  height: 50px;
+  border: none;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  padding: 0 10px;
+}
+
+/* pied de formulaire */
+.modal_form_footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+/* bouton upload dans la modale (réutilise .button) */
+.button_upload {
+  background-color: #cbd6dc;
+  color: #306685;
+  width: auto;
+}
+
+/* quand on est en vue formulaire, on cachera le bouton "Ajouter une photo" */
