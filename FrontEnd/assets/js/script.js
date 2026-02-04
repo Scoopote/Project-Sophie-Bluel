@@ -149,6 +149,35 @@ async function galleryModal() {
   });
 }
 
+// Bascule entre la vue galerie et la vue formulaire dans la modale
+function showModalGalleryView() {
+  const modalContent = document.getElementById("modal_content");
+  const modalForm = document.getElementById("modal_form");
+  const title = document.querySelector(".title_mod_gallery");
+  const backIcon = document.querySelector(".modale_back");
+  const addPhotoButton = document.getElementById("button_add_photo");
+
+  title.textContent = "Gallerie photo";
+  modalContent.style.display = "flex";
+  modalForm.style.display = "none";
+  addPhotoButton.style.display = "block";
+  backIcon.style.visibility = "hidden";
+}
+
+function showModalFormView() {
+  const modalContent = document.getElementById("modal_content");
+  const modalForm = document.getElementById("modal_form");
+  const title = document.querySelector(".title_mod_gallery");
+  const backIcon = document.querySelector(".modale_back");
+  const addPhotoButton = document.getElementById("button_add_photo");
+
+  title.textContent = "Ajout photo";
+  modalContent.style.display = "none";
+  modalForm.style.display = "flex";
+  addPhotoButton.style.display = "none";
+  backIcon.style.visibility = "visible";
+}
+
 // Ouverture de la modale
 function openModal() {
   const modal = document.querySelector(".modale_gallery");
@@ -172,20 +201,101 @@ function initModalEvents() {
   const mesProjets = document.getElementById("MesProjets");
   const closeIcon = document.querySelector(".modale_close");
   const shad = document.getElementById("shad");
+  const backIcon = document.querySelector(".modale_back");
+  const addPhotoButton = document.getElementById("button_add_photo");
 
+  // Ouvrir au clic sur "Mes Projets Modifier"
   mesProjets.addEventListener("click", () => {
     if (!token) return;
     openModal();
+    showModalGalleryView(); // toujours ouvrir sur la vue galerie
   });
 
+  // Fermer au clic sur la croix
   closeIcon.addEventListener("click", () => {
     closeModal();
   });
 
+  // Fermer au clic sur le fond sombre
   shad.addEventListener("click", () => {
     closeModal();
   });
+
+  // Afficher la vue formulaire au clic sur "Ajouter une photo"
+  addPhotoButton.addEventListener("click", () => {
+    showModalFormView();
+  });
+
+  // Retour à la vue galerie au clic sur la flèche
+  backIcon.addEventListener("click", () => {
+    showModalGalleryView();
+  });
+
+  // Rendu de la galerie dans la modale
+async function galleryModal() {
+  const gallery = document.getElementById("modal_content");
+  gallery.innerHTML = "";
+
+  const works = await getWorks();
+
+  works.forEach((work) => {
+    const div = document.createElement("div");
+    div.classList.add("modal_item");
+    div.style.backgroundImage = `url(${work.imageUrl})`;
+    div.dataset.id = work.id; // on garde l'id du projet
+
+    const trash = document.createElement("div");
+    trash.classList.add("trash_color");
+    trash.innerHTML = '<i class="fa-solid fa-trash-can"></i>';
+
+    // clic sur la poubelle = suppression du travail
+    trash.addEventListener("click", async (event) => {
+      event.stopPropagation(); // évite des clics parasites
+      await deleteWork(work.id, div);
+    });
+
+    div.appendChild(trash);
+    gallery.appendChild(div);
+  });
 }
+
+}
+
+// Suppression d'un travail via l'API + mise à jour du DOM
+async function deleteWork(workId, modalItemElement) {
+  if (!token) {
+    alert("Vous devez être connecté pour supprimer un projet.");
+    return;
+  }
+
+  const confirmDelete = confirm("Voulez-vous vraiment supprimer ce projet ?");
+  if (!confirmDelete) return;
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/works/${workId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      alert("La suppression a échoué.");
+      return;
+    }
+
+    // 1) Retirer l'élément de la modale
+    modalItemElement.remove();
+
+    // 2) Rafraîchir la galerie principale sans recharger la page
+    await displayWorks();
+
+  } catch (error) {
+    console.error("Erreur lors de la suppression :", error);
+    alert("Une erreur réseau est survenue.");
+  }
+}
+
 
 // Point d'entrée
 init();
