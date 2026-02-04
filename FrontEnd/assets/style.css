@@ -132,11 +132,16 @@ li:hover {
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
+.gallery figure {
+  overflow: hidden;
+}
 
 .gallery img {
-	width: 100%;
-
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* ou contain selon le rendu que tu veux */
 }
+
 #contact {
 	width: 50%;
 margin: auto;
