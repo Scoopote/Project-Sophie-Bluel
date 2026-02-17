@@ -37,6 +37,8 @@ emptyOption.style.color = "#6C6C6C";
     option.textContent = category.name;
     select.appendChild(option);
   });
+
+
 }
 
 // Rendu de la galerie principale (liste complète)
@@ -274,6 +276,10 @@ function initImagePreview() {
     reader.addEventListener("load", () => {
       previewContainer.innerHTML = "";
       const img = document.createElement("img");
+      const button = document.querySelector(".button_validate"); 
+      if (button) {
+        button.style.backgroundColor = "#1d6154";
+      }
       img.src = reader.result;
       previewContainer.appendChild(img);
 
