@@ -27,8 +27,8 @@ async function populateCategorySelect() {
   const categories = await getCategories();
 
   const emptyOption = document.createElement("option");
-  emptyOption.value = "";
-  emptyOption.textContent = "Choisissez une catégorie";
+emptyOption.style.color = "#6C6C6C";
+
   select.appendChild(emptyOption);
 
   categories.forEach((category) => {
@@ -184,7 +184,7 @@ function showModalGalleryView() {
   const backIcon = document.querySelector(".modale_back");
   const addPhotoButton = document.getElementById("button_add_photo");
 
-  title.textContent = "Gallerie photo";
+  title.textContent = "Galerie photo";
   modalContent.style.display = "flex";
   modalForm.style.display = "none";
   addPhotoButton.style.display = "block";

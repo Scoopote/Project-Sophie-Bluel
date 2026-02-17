@@ -125,6 +125,18 @@ li:hover {
 	text-align: center;
 	margin-bottom: 1em;
 }
+
+
+
+.presentation {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	gap: 15px;
+
+	padding-right: 180px;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -133,11 +145,13 @@ li:hover {
 	grid-row-gap: 20px;
 }
 .gallery figure {
-  overflow: hidden;
+  margin-bottom: 20px;
 }
 
 .gallery img {
   width: 100%;
+  object-fit: cover;
+  height: 100%;
 }
 
 #contact {
@@ -288,13 +302,17 @@ a {
 
 /* modal */
 .modale_gallery {
+
+	position: relative;
 	padding: 20px;
+	padding-inline: 100px;
   display: none;
   flex-direction: column;
   align-items: center;
   position: absolute;
   z-index: 1;
-  left: 63vh;
+  left: 60vh;
+  right: 60vh;
   top: 660px;
   width: 630px;
   height: 688px;
@@ -302,38 +320,50 @@ a {
   background-color: rgb(255, 255, 255);
 }
 .modale_close {
-  align-self: flex-end;
-
-  cursor: pointer;
+  
+position: absolute;
+right: 20px;
+top: 20px;
+cursor: pointer;
 }
 .title_mod_gallery {
+	text-align: center;
   font-family: "Syne";
-  font-weight: 700;
-  font-size: 24px;
+  font-weight: 400;
+  font-size: 26px;
   color: #000000;
   margin-top: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 .modal_content{
 	display: flex;
 	flex-wrap: wrap;
 	gap: 20px;
-	border-bottom: #000000 2px solid;
+	border-bottom: #B3B3B3 1px solid;
 	width: 100%;
 }
 .modal_item{
+
 	width: 95px;
 	height: 150.57px;
 	object-fit: cover;
 	display:flex;
 	flex-direction: column;
 	background-size: contain;
+
 		background-repeat: no-repeat;
 		padding: 5px;
-
-
 	
 }
+.modal_item:last-child{
+	height: 131px;
+background-size: cover;
+margin-bottom: 80px;
+
+
+}
+
+
 .trash_color{
 	color: #ffffff;
 	background-color: #000000;
@@ -423,10 +453,11 @@ a {
 .modal_form input[type="text"],
 .modal_form select {
   height: 50px;
-  border: none;
+  border: 1px solid #ffffff;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-  padding: 0 10px;
+
 }
+
 
 /* pied de formulaire */
 .modal_form_footer {
