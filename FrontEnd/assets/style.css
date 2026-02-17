@@ -487,4 +487,13 @@ margin-bottom: 80px;
   width: auto;
 }
 
+.shad{
+	width: 100vh;
+	height: 100vh;
+	position: absolute;
+	background: #000000 80%;
+	
+
+}
+
 /* quand on est en vue formulaire, on cachera le bouton "Ajouter une photo" */
