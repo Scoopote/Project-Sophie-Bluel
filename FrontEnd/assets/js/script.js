@@ -251,6 +251,10 @@ function initModalEvents() {
   });
 
   addPhotoButton.addEventListener("click", () => {
+    const button_validate = document.querySelector(".button_validate");
+    if (button_validate) {
+      button_validate.style.backgroundColor = "#A7A7A7";
+    }
     showModalFormView();
   });
 
