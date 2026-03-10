@@ -94,8 +94,8 @@ nav ul {
 
 }
 nav li {
-	padding: 0 10px;
-	font-size: 1.2em;
+	padding: 0 25px;
+	font-size: 16px;
 	/* show pointer for clickable nav items */
 	cursor: pointer;
 }
@@ -304,11 +304,10 @@ a {
   color: #fff;
 }
 .projet_modif{
-	margin-left: 10px;
+	margin-left: 20px;
 	color: black;
 	font-family: 'Work Sans';
-	font-size:10px;
-	letter-spacing: 0.1em;
+	font-size:14px;
 	cursor: pointer;
 }
 #MesProjets{
