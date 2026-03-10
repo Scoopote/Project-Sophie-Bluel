@@ -235,12 +235,18 @@ function initModalEvents() {
   const backIcon = document.querySelector(".modale_back");
   const addPhotoButton = document.getElementById("button_add_photo");
 
-  mesProjets.addEventListener("click", () => {
-    if (!token) return;
+  function openGalleryModalIfAuth(event) {
+    if (!token) return;                // only if logged in
+    event && event.preventDefault();   // avoid anchor scrolling when opening modal
     openModal();
     showModalGalleryView();
     galleryModal();
-  });
+  }
+
+  // only the page heading triggers the modal when authenticated
+  mesProjets.addEventListener("click", openGalleryModalIfAuth);
+  // the nav link remains a plain anchor: scrolling behaviour only
+
 
   closeIcon.addEventListener("click", () => {
     closeModal();

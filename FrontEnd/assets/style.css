@@ -96,6 +96,14 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+	/* show pointer for clickable nav items */
+	cursor: pointer;
+}
+
+nav li a {
+	text-decoration: none;
+	color: inherit;
+	cursor: pointer;
 }
 
 li:hover {
@@ -242,6 +250,11 @@ a {
 	padding-inline: 8px;
 	padding-block: 16px;
 	border : none;
+	cursor: pointer; /* show hand on hover */
+}
+
+.button:hover {
+	opacity: 0.9;
 }
 
 /* header */
@@ -307,21 +320,25 @@ a {
 /* modal */
 .modale_gallery {
 
-	position: relative;
+	/* center in viewport */
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
 	padding: 20px;
 	padding-inline: 100px;
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  position: absolute;
-  z-index: 1;
-  left: 60vh;
-  right: 60vh;
-  top: 660px;
-  width: 630px;
-  height: 688px;
-  overflow: auto;
-  background-color: rgb(255, 255, 255);
+	display: none;
+	flex-direction: column;
+	align-items: center;
+	z-index: 10;
+
+	/* responsive size, leaving margin around */
+	max-width: 90vw;
+	width: 630px;
+	max-height: 90vh;
+	overflow: auto; /* scroll only inner content if needed */
+	background-color: rgb(255, 255, 255);
 }
 .modale_close {
   
@@ -459,8 +476,7 @@ margin-bottom: 80px;
   height: 50px;
   border: 1px solid #ffffff;
   box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-
-
+  cursor: pointer; /* make it clear it's interactive */
 }
 
 .modal_form select {
@@ -468,6 +484,13 @@ margin-bottom: 80px;
  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path fill="rgba(108, 108, 108, 1.00)" d="M297.4 438.6C309.9 451.1 330.2 451.1 342.7 438.6L502.7 278.6C515.2 266.1 515.2 245.8 502.7 233.3C490.2 220.8 469.9 220.8 457.4 233.3L320 370.7L182.6 233.4C170.1 220.9 149.8 220.9 137.3 233.4C124.8 245.9 124.8 266.2 137.3 278.7L297.3 438.7z"/></svg>') no-repeat right 25px center;
  background-size: 15px;
 }
+
+/* style individual options on hover */
+.modal_form select option:hover {
+  background-color: #e0e0e0;
+}
+
+/* no extra hover background needed; native dropdown feedback is sufficient */
 
 
 /* pied de formulaire */
@@ -488,19 +511,30 @@ margin-bottom: 80px;
   background-color: #cbd6dc;
   color: #306685;
   width: auto;
+  cursor: pointer;
+}
+
+.button_validate {
+  cursor: pointer;
 }
 
 #shad{
+	/* overlay hidden when modal is closed */
+	display: none;
 	width: 100%;
 	height: 100%;
 	position: absolute;
+	z-index: 0; /* sit behind the modal which uses z-index:1 */
 	top : 0;
 	right: 0;
 	left: 0;
 	bottom: 0;
 	background: #00000080;
-	;
-	
+}
+
+/* helper class to show the overlay */
+#shad.visible {
+	display: block;
 }
 
 /* quand on est en vue formulaire, on cachera le bouton "Ajouter une photo" */
