@@ -105,7 +105,12 @@ nav li a {
 	color: inherit;
 	cursor: pointer;
 }
-
+/* Instagram icon should be small */
+nav li a img {
+	width: 20px;
+	height: 20px;
+	vertical-align: middle;
+}
 li:hover {
 	color: #B1663C;
 }
